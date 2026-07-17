@@ -1,94 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: transparent;
-        }
-
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #image {
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-            user-select: none;
-            -webkit-user-drag: none;
-            image-rendering: auto;
-            display: block;
-        }
-
-        /* Fallback se a imagem não carregar */
-        .fallback-bg {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
-        }
-    </style>
+<meta charset="UTF-8">
+<style>
+html,body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    background:transparent;
+}
+img{
+    width:100%;
+    height:100%;
+    object-fit:fill;
+}
+</style>
 </head>
+
 <body>
-    <img id="image" alt="Menu Texture">
-    <div id="fallback" class="fallback-bg" style="display: none;"></div>
 
-    <script>
-        // Pega os parâmetros da URL
-        const params = new URLSearchParams(window.location.search);
-        const image = params.get("image");
-        const url = params.get("url");
-        const img = document.getElementById("image");
-        const fallback = document.getElementById("fallback");
+<img id="img">
 
-        // URLs das imagens - TODAS COM RAW GITHUB
-        const imageUrls = {
-            "notify": "https://raw.githubusercontent.com/lucasfabresv-maker/menupresets/main/images/notify.png",
-            "background": "https://raw.githubusercontent.com/lucasfabresv-maker/menupresets/main/images/background.png",
-            "conteiner": "https://raw.githubusercontent.com/lucasfabresv-maker/menupresets/main/images/conteiner.png",
-            "tab": "https://raw.githubusercontent.com/lucasfabresv-maker/menupresets/main/images/tab.png",
-            "button": "https://raw.githubusercontent.com/lucasfabresv-maker/menupresets/main/images/button.png",
-            "cursor": "https://raw.githubusercontent.com/lucasfabresv-maker/menupresets/main/images/cursor.png",
-            "error": "https://raw.githubusercontent.com/lucasfabresv-maker/menupresets/main/images/error.png",
-            "sucess": "https://raw.githubusercontent.com/lucasfabresv-maker/menupresets/main/images/sucess.png",
-            "warn": "https://raw.githubusercontent.com/lucasfabresv-maker/menupresets/main/images/warn.png",
-            "toggle": "https://raw.githubusercontent.com/lucasfabresv-maker/menupresets/main/images/toggle.png"
-        };
+<script>
+const params = new URLSearchParams(location.search);
+document.getElementById("img").src = params.get("image") + ".png";
+</script>
 
-        if (url) {
-            // Se passar URL direto
-            img.src = url;
-            img.onerror = () => {
-                img.style.display = "none";
-                fallback.style.display = "block";
-            };
-        } else if (image && imageUrls[image]) {
-            // Se passar um nome de imagem predefinido
-            img.src = imageUrls[image];
-            img.onerror = () => {
-                img.style.display = "none";
-                fallback.style.display = "block";
-            };
-        } else {
-            // Se nenhum parâmetro válido, limpa o body
-            document.body.innerHTML = "";
-        }
-
-        // Log para debug (visível no console do navegador)
-        console.log("Menu Textures - Parâmetros:", { image, url });
-        console.log("URL carregada:", image && imageUrls[image] ? imageUrls[image] : url);
-    </script>
 </body>
 </html>
