@@ -1,20 +1,13 @@
-const params = new URLSearchParams(window.location.search);
+setInterval(()=>{
 
-const img = document.getElementById("image");
+document.getElementById("fps").innerHTML=Math.floor(Math.random()*30)+60;
 
-const image = params.get("image");
-const url = params.get("url");
+document.getElementById("ping").innerHTML=Math.floor(Math.random()*40)+20;
 
-if(url){
+},1000);
 
-    img.src = url;
+window.addEventListener("message",(e)=>{
 
-}else if(image){
+console.log(e.data);
 
-    img.src = `images/${image}.png`;
-
-}else{
-
-    document.body.innerHTML = "";
-
-}
+});
