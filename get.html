@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUI Image Loader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: transparent; /* Mantém o fundo transparente para o FiveM */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill; /* Faz a imagem ocupar o tamanho exato definido pelo DUI */
+        }
+    </style>
+</head>
+<body>
+
+    <img id="imagem-alvo" src="" alt="Carregando..." style="display: none;">
+
+    <script>
+        // Função para pegar parâmetros da URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Pega o valor do parâmetro '?link='
+        const urlDaImagem = getQueryParam('link');
+
+        if (urlDaImagem) {
+            const imgElement = document.getElementById('imagem-alvo');
+            
+            // Define o link recebido como a origem da imagem
+            imgElement.src = urlDaImagem;
+            imgElement.style.display = 'block';
+        } else {
+            document.body.innerHTML = "<p style='color: white;'>Nenhum link de imagem foi fornecido.</p>";
+        }
+    </script>
+</body>
+</html>
